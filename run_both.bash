@@ -36,5 +36,11 @@ v4l2src device=/dev/video1 ! video/x-raw,width=640,height=512,format=I420 ! tee 
 t. ! queue ! videoconvert ! omxh264enc ! queue ! mp4mux ! filesink location="$OUTPUT"_thermal.mp4 \
 t. ! queue ! video/x-raw,width=640,height=512,format=I420 ! glimagesink &
 
+# run ROS record
+source /home/wildfire/Development/dji_sample_ws/devel/setup.bash
+rosbag record -a -O "$OUT_FOLDER"/"$DATETIME"_dji_sdk.bag __name:="data_collect" &
+
 # run status
-bash "$script_full_path"/blink_heartbeat.bash
+bash "$script_full_path"/blink_heartbeat.bash &
+
+wait
