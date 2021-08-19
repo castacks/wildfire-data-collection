@@ -7,9 +7,11 @@ trap 'kill $(jobs -p %1)' INT TERM
 script_name=$0
 script_full_path=$(dirname "$0")
 
+. ./constants.bash
+
 
 if [ -z "$1" ]; then
-	ROOT=/media/wildfire/T7/wildfire
+	ROOT="$DEFAULT_ROOT"
 else
 	ROOT="$1"
 fi

@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
+. ./constants.bash
+
 if [ -z "$1" ]; then
-	FOLDER=/media/wildfire/seagate/wildfire
+	FOLDER="$DEFAULT_ROOT"
 else
 	FOLDER="$1"
 fi
