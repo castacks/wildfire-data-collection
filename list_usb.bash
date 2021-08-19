@@ -1,4 +1,5 @@
 #!/bin/bash
+# Lists out the USB devices
 
 for sysdevpath in $(find /sys/bus/usb/devices/usb*/ -name dev); do
     (
