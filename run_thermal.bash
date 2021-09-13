@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-. ./constants.bash
+source "$script_full_path"/constants.bash
 
 if [ -z "$1" ]; then
 	FOLDER="$DEFAULT_ROOT"

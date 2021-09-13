@@ -7,7 +7,7 @@ trap 'kill $(jobs -p %1)' INT TERM
 script_name=$0
 script_full_path=$(dirname "$0")
 
-. ./constants.bash
+source "$script_full_path"/constants.bash
 
 
 if [ -z "$1" ]; then
