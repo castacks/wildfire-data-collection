@@ -21,8 +21,10 @@ do
 
     # check thermal. Let thermal be orange
     thermal_works=`pgrep -f "gst-launch-1.0.*thermal\.mp4"`
+    thermal_ros=`timeout 3 rostopic echo -n 1 /thermal/camera_info`
+    echo Thermal ROS $thermal_ros
     # echo "thermal: $thermal_works"
-    if [ -n "$thermal_works" ]; then
+    if [[ -n "$thermal_works" || -n "$thermal_ros" ]]; then
         blink1-tool --rgb "$ORANGE" --blink 1 -q
     fi
 

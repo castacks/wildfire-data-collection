@@ -33,15 +33,16 @@ t. ! queue ! "video/x-raw(memory:NVMM),width=1920,height=1080,framerate=60/1" ! 
 t. ! queue ! nvvidconv flip-method=2 ! xvimagesink &
 
 # run thermal
-gst-launch-1.0 -e \
-v4l2src device=/dev/video1 ! video/x-raw,width=640,height=512,format=I420 ! tee name=t \
-t. ! queue ! videoconvert ! omxh264enc ! queue ! mp4mux ! filesink location="$OUTPUT"_thermal.mp4 \
-t. ! queue ! video/x-raw,width=640,height=512,format=I420 ! glimagesink &
+source /home/wildfire/Development/dji_sample_ws/devel/setup.bash && roslaunch flir_ros_sync flir_ros.launch &
+# gst-launch-1.0 -e \
+# v4l2src device=/dev/video1 ! video/x-raw,width=640,height=512,format=I420 ! tee name=t \
+# t. ! queue ! videoconvert ! omxh264enc ! queue ! mp4mux ! filesink location="$OUTPUT"_thermal.mp4 \
+# t. ! queue ! video/x-raw,width=640,height=512,format=I420 ! glimagesink &
 
 # run ROS record
 if rostopic list | grep -q "/rosout"; then
 	source /home/wildfire/Development/dji_sample_ws/devel/setup.bash
-	rosbag record -a -O "$OUT_FOLDER"/"$DATETIME"_dji_sdk.bag __name:="data_collect" &
+	rosbag record -a -O "$OUT_FOLDER"/"$DATETIME"_dji_sdk_and_thermal.bag __name:="data_collect" &
 else
 	echo "roscore not running, not recording DJI SDK data"
 fi

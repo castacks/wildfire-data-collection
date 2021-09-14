@@ -15,7 +15,11 @@
 echo "pkill gst-launch-1.0"
 pkill -f -INT "gst-launch-1.0"
 echo "kill node"
-rosnode kill "/data_collect" || echo "/data_collect rosbag record node not running, nothing to kill"
+rosnode kill "data_collect" || echo "/data_collect rosbag record node not running, nothing to kill"
+sleep 1
+rosnode kill "flir_nodelet" || echo "/flir_nodelet node not running, nothing to kill"
+sleep 1
+rosnode kill "flir_nodelet_manager" || echo "/flir_nodelet_manager node not running, nothing to kill"
 sleep 2
 echo "pkill heartbeat"
 pkill -f "blink_heartbeat.bash"
