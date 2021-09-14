@@ -1,7 +1,12 @@
 #!/bin/bash
 set -e
 
+if [ -z ${script_full_path+x} ]; then 
+	script_full_path=$(dirname "$0")
+fi
+echo "var is set to '$script_full_path'" 
 source "$script_full_path"/constants.bash
+
 
 if [ -z "$1" ]; then
 	FOLDER="$DEFAULT_ROOT"
