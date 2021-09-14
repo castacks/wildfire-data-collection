@@ -22,5 +22,5 @@ OUTPUT="$FOLDER/$DATETIME"
 echo "Saving to $OUTPUT"
 
 gst-launch-1.0 -e nvarguscamerasrc sensor-id=0 ! tee name=t \
-t. ! queue ! "video/x-raw(memory:NVMM),width=1920,height=1080,framerate=60/1" ! nvvidconv flip-method=2 ! nvv4l2h264enc ! h264parse ! mp4mux ! filesink location="$OUTPUT"_rgb.mp4 \
+t. ! queue ! "video/x-raw(memory:NVMM),width=2560,height=1440,framerate=40/1" ! nvvidconv flip-method=2 ! nvv4l2h264enc ! h264parse ! mp4mux ! filesink location="$OUTPUT"_rgb.mp4 \
 t. ! queue ! nvvidconv flip-method=2 ! xvimagesink
