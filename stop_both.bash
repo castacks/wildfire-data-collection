@@ -1,5 +1,6 @@
 #!/bin/bash
 # tip: Make this file a shortcut, e.g. Ctrl-Alt-X
+source /opt/ros/melodic/setup.bash
 
 # https://stackoverflow.com/a/15139734
 # PID=$(pgrep -f "run_both.bash")

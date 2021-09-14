@@ -1,5 +1,6 @@
 #!/bin/bash
 # run me at startup
+source /opt/ros/melodic/setup.bash
 
 script_full_path=$(dirname "$0")
 
