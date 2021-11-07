@@ -21,10 +21,12 @@ DATETIME=$(date +"%Y-%m-%d_%H-%M-%S")
 OUTPUT="$FOLDER/$DATETIME_both"
 echo "Saving to $OUTPUT"
 
+VIDEO_DEVICE="1"  # CHANGE ME IF NEEDED
+
 # https://stackoverflow.com/a/52033580
 (trap 'kill 0' SIGINT; \
 gst-launch-1.0 -e \
-v4l2src device=/dev/video0 ! video/x-raw,width=640,height=512,format=I420 ! tee name=t \
+v4l2src device=/dev/video"$VIDEO_DEVICE" ! video/x-raw,width=640,height=512,format=I420 ! tee name=t \
 t. ! queue ! videoconvert ! omxh264enc ! queue ! mp4mux ! filesink location="$OUTPUT"_thermal.mp4 \
 t. ! queue ! video/x-raw,width=640,height=512,format=I420 ! glimagesink
 )
